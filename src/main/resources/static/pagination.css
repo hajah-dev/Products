@@ -1,0 +1,10 @@
+.pagination{
+    list-style: none;
+    display: inline;
+}
+.card-footer{
+    text-align: center;
+}
+.space{
+    margin-left: 1rem;
+}
