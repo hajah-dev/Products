@@ -11,11 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-/**
- * L'annotation suivante est pour le MOR : @Entity --> pour dire que la class Produit
- * correspond à une table au niveau de la BDD. Si on veut spécifier le nom de cette
- * table (pas obligatoire) : @Table(name="PRODUIT").
- */
+
 @Entity
 public class Produit implements Serializable {
     @Id
