@@ -30,8 +30,8 @@ public class MycatalogueApplication implements CommandLineRunner {
          * tout est chargé en mémoire, il va faire appel à cette méthode run(String...args)
          */
         System.out.println("**************************");
-        produitRepository.save(new Produit(null, "Imprimante Dell", 6500, 11));
-        produitRepository.save(new Produit(null, "Imprimante HP", 3200, 20));
+        //produitRepository.save(new Produit(null, "Imprimante Dell", 6500, 11));
+        //produitRepository.save(new Produit(null, "Imprimante HP", 3200, 20));
 
 //        produitRepository.save(new Produit(null, "Smart phone", 1750, 30));
 //        produitRepository.save(new Produit(null, "Scaner HP", 850, 25));

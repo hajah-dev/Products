@@ -22,10 +22,13 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-link active" th:href="@{/products}">Home<span class="sr-only">(current)</span></a>
-            <a class="nav-link" th:href="@{/formProduit}">Products</a>
+            <a class="nav-link active" th:href="@{/user/products}">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-link" th:href="@{/admin/formProduit}">Products</a>
             <a class="nav-link" href="#">Catégories</a>
             <a class="nav-link" href="#">Catalogue</a>
+        </div>
+        <div class="navbar-nav pull-right">
+            <a th:href="@{/logout}">Log out</a>
         </div>
     </div>
 </nav>

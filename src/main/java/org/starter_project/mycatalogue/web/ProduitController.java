@@ -25,7 +25,7 @@ public class ProduitController {
     @Autowired
     private ProduitRepository produitRepository;
 
-    @GetMapping(path="/products")
+    @GetMapping(path="/user/products")
     public String products(Model model,
                            @RequestParam(name="page", defaultValue = "0") int page1,
                            @RequestParam(name="motCle", defaultValue = "") String mc) {
@@ -44,7 +44,7 @@ public class ProduitController {
         model.addAttribute("motCle", mc);
         return "products"; // products.html
     }
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String delete(Long id, int page, String motCle){
         /**
          * On peut ne pas mettre @RequestParam parce que par défaut, Spring
@@ -55,7 +55,7 @@ public class ProduitController {
         // Dans le code suivant on va demander à Spring de nous rediriger vers
         // "/products" et la page courante où on a suprrimé un produit en gardant
         // le mot clé dans le cas où il s'agirait d'une suppression après une recherche.
-        return "redirect:/products?page="+page+"&motCle="+motCle;
+        return "redirect:/user/products?page="+page+"&motCle="+motCle;
     }
 
 
@@ -66,25 +66,40 @@ public class ProduitController {
      * défini l'attribut qu'on va exploiter dans formproduit.html, on va y faire pour chaque
      * champ "un data-binding"
      */
-    @GetMapping("/formProduit")
+    @GetMapping("/admin/formProduit")
     public String form(Model model){
         model.addAttribute("produit", new Produit());
         return "formproduit";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String save(@Valid Produit produit, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) return "formproduit";
         // Si il y a erreur Spring va placer automatiquement bindingResult (erreur) dans Model model.
         produitRepository.save(produit);
-        return "redirect:/products";
+        return "redirect:/user/products";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/admin/edit")
     public String edit(Model model,Long id){
         // On met .get à la fin de la méthode findById(id) pour qu'elle retourne un produit.
         Produit produit = produitRepository.findById(id).get();
         model.addAttribute("produit", produit);
         return "EditProduit";
+    }
+
+    @GetMapping("/")
+    public String def(){
+        return "redirect:/user/products";
+    }
+
+    @GetMapping("/403")
+    public String notAutorized(){
+        return "403";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 }

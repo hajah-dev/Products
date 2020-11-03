@@ -22,7 +22,7 @@
                     <!--Comme on utilise Thymeleaf, au lieu d'utiliser juste action=""
                     dans form, on va écrire: th:action="". Pour valider le formulaire
                     on utilise @{}-->
-                    <form th:action="@{/products}" method="get">
+                    <form th:action="@{/user/products}" method="get">
                         <label>Mot Clé</label>
                         <input type="text" name="motCle" th:value="${motCle}">
                         <button type="submit" class="btn btn-primary">
@@ -50,12 +50,12 @@
                                 à une recherche)
                                 -->
                                 <a onclick="return confirm ('Etes vous sûr de vouloir supprimer')"
-                                   th:href="@{/delete(id=${p.id},page=${currentPage}, motCle=${motCle})}">
+                                   th:href="@{/admin/delete(id=${p.id},page=${currentPage}, motCle=${motCle})}">
                                     Delete
                                 </a>
                             </td>
                             <td>
-                                <a th:href="@{/edit(id=${p.id})}">Edit</a>
+                                <a th:href="@{/admin/edit(id=${p.id})}">Edit</a>
                             </td>
                         </tr>
                     </table>
@@ -72,7 +72,7 @@
                          -->
                         <li th:class="${currentPage==status.index}?'page-item active':''" th:each="page,status:${pages}">
                             <a class="page-link"
-                               th:href="@{/products(page=${status.index},motCle=${motCle})}" th:text="${status.index}">
+                               th:href="@{/user/products(page=${status.index},motCle=${motCle})}" th:text="${status.index}">
                             </a>
                         </li>
                     </ul>
