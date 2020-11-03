@@ -2,11 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
-<!--L'expression layout:decorate="layout" veut dire qu'on veut décorer
-    cette page avec la page layout.html-->
-<!--Pour que cette page puisse utiliser la page template, il faut
-    d'abord ajouter le namespace: xmlns:layout="http://www.ultraq.net.nz..."
-    après on va utiliser le layout:decorate="layout.html"-->
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -18,10 +13,7 @@
         <div class="container mt-5">
             <div class="panel panel-primary">
                 <div class="panel panel-heading">Liste de produits</div>
-                <div class="panel-body">
-                    <!--Comme on utilise Thymeleaf, au lieu d'utiliser juste action=""
-                    dans form, on va écrire: th:action="". Pour valider le formulaire
-                    on utilise @{}-->
+                <div class="panel-body">               
                     <form th:action="@{/products}" method="get">
                         <label>Mot Clé</label>
                         <input type="text" name="motCle" th:value="${motCle}">
@@ -44,11 +36,7 @@
                             <td th:text="${p.prix}"></td>
                             <td th:text="${p.quantite}"></td>
                             <td>
-                                <!-- Pour qu'après la suppression, on reste sur même page (la page courante),
-                                on doit ajouter les paramètres: page=${currentPage} et motCle=${motCle}
-                                (dans le cas où on supprime après avoir reçu la liste des produits suite
-                                à une recherche)
-                                -->
+     
                                 <a onclick="return confirm ('Etes vous sûr de vouloir supprimer')"
                                    th:href="@{/delete(id=${p.id},page=${currentPage}, motCle=${motCle})}">
                                     Delete
@@ -62,14 +50,7 @@
                     <h3>Le nombre total de produit trouvé </h3>
                     <h3 th:text="${totalTrouve}"></h3>
                     <ul class="pagination pagination-sm">
-                        <!--Si on veut afficher l'index au lieu de l'élément
-                         lui même, on va déclarer 2 arguments à la boucle: page, status
-                         dont le 2èm argument est l'index du tableau
-                         L'expression th:href="@{/products(page=${status.index})} est équivalent
-                         à : href="/products?page=status.index".
-                         th:class="${currentPage==status.index} ? 'active':''" ==> on va appeler une class CSS si
-                         une condition est vérifée.
-                         -->
+                      
                         <li th:class="${currentPage==status.index}?'page-item active':''" th:each="page,status:${pages}">
                             <a class="page-link"
                                th:href="@{/products(page=${status.index},motCle=${motCle})}" th:text="${status.index}">
