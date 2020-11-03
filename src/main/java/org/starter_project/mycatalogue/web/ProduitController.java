@@ -46,26 +46,11 @@ public class ProduitController {
     }
     @GetMapping("/admin/delete")
     public String delete(Long id, int page, String motCle){
-        /**
-         * On peut ne pas mettre @RequestParam parce que par défaut, Spring
-         * cherche un paramètre qui s'appelle id.(Le paramètre porte le même nom que
-         * la variable)
-         */
+        
         produitRepository.deleteById(id);
-        // Dans le code suivant on va demander à Spring de nous rediriger vers
-        // "/products" et la page courante où on a suprrimé un produit en gardant
-        // le mot clé dans le cas où il s'agirait d'une suppression après une recherche.
         return "redirect:/user/products?page="+page+"&motCle="+motCle;
     }
 
-
-    /**
-     * Validation:
-     * Pour procéder aux validations: quand on appel le formulaire, on a besoin d'y utiliser
-     * le Model (interface appartenant à Spring) comme argument. Une fois qu'on ait
-     * défini l'attribut qu'on va exploiter dans formproduit.html, on va y faire pour chaque
-     * champ "un data-binding"
-     */
     @GetMapping("/admin/formProduit")
     public String form(Model model){
         model.addAttribute("produit", new Produit());
@@ -75,14 +60,14 @@ public class ProduitController {
     @PostMapping("/admin/save")
     public String save(@Valid Produit produit, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) return "formproduit";
-        // Si il y a erreur Spring va placer automatiquement bindingResult (erreur) dans Model model.
+       
         produitRepository.save(produit);
         return "redirect:/user/products";
     }
 
     @GetMapping("/admin/edit")
     public String edit(Model model,Long id){
-        // On met .get à la fin de la méthode findById(id) pour qu'elle retourne un produit.
+       
         Produit produit = produitRepository.findById(id).get();
         model.addAttribute("produit", produit);
         return "EditProduit";
