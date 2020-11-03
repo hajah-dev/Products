@@ -12,27 +12,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Nouveau Produit
                 <div class="panel-body">
-                    <!--L'expression suivante (dans form) veut dire
-                    que quand on va valider par post, on va appeler la méthode
-                    save (quand on va appuyer sur le boutton save)
-                    -->
-<!--                    <form th:bools="${edition.edit}" ? th:action="@{/edit}" : th:action="@{/save}"></form>-->
+               
                     <form th:action="@{/save}" method="post">
                         <div class="form-group">
                             <label class="control-label">Designation</label>
-                            <!-- C'est très important de donner le même nom aux champs que
-                                 l'attribut dans la class produit.
-                                 Pour obliger l'utilisateur à saisir un donné qui réspecte
-                                 un format (ou validation)
-                            -->
+                           
                             <input class="form-control" type="text" name="designation" th:value="${produit.designation}"/>
-                        <!--Dans le code suivant, c'est comme si on disait à Thymeleaf
-                            que si il y une erreur correspondant au champ designation
-                            dans la collection des erreurs, affiche nous le message d'erreur
-                            (Il y a un message par défaut qui est généré
-                        -->
+                        
                             <span th:errors="${produit.designation}"></span>
-<!--                            <span th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></span>-->
                         </div>
                         <div class="form-group">
                             <label class="control-label">Prix</label>
